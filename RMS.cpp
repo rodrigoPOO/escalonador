@@ -18,5 +18,6 @@ RMS::~RMS() {
 void RMS::decrementarProcesso(PCB p){
 	int v = p.getPrioridade();
 	p.setPrioridade(--v);
+	//aaaaaa
 }
 
