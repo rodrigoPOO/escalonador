@@ -23,7 +23,10 @@ public:
 	virtual ~RMS();
 	void moverProcessos();
 	void prontoParaexecutando(PCB p);
-	void prontoParaexecutando(PCB p);
+	void executandoParaterminado(PCB p);
+	void executandoParabloqueado(PCB p);
+	void executandoParaterminado(PCB p);
+	void bloqueadoParaexecutando(PCB p);
 	void decrementarProcesso(PCB p);
 
 

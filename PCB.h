@@ -28,9 +28,10 @@ public:
 	int getPrioridade();
 	int getPeriodo();
 	int getEstado();
+	int getExec();
 	void setPrioridade(int p);
 	void setEstado(int p);
-
+	void setExec(int exec);
 
 };
 

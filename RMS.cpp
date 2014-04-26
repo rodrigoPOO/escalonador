@@ -16,8 +16,6 @@ RMS::~RMS() {
 	// TODO Auto-generated destructor stub
 }
 void RMS::decrementarProcesso(PCB p){
-	int v = p.getPrioridade();
-	p.setPrioridade(--v);
-	//aaaaaa
+	p.setExec(--p.getExec());
 }
 
