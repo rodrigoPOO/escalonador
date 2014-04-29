@@ -8,12 +8,14 @@
 #ifndef ITERADORLISTAENCADEADA_H_
 #define ITERADORLISTAENCADEADA_H_
 #include <stdlib.h>
+#include "ListaEncadeada.h"
 
 template<class T>
 class IteradorListaEncadeada {
 	NoDaListaSimples<T>* iterador;
+
 public:
-	IteradorListaEncadeada(ListaEncadeada<T> *l);
+	IteradorListaEncadeada(ListaEncadeada<T>* l);
 	virtual ~IteradorListaEncadeada();
 	bool ExisteProximo();
 	NoDaListaSimples<T>* Proximo();

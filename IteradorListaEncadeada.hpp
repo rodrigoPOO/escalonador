@@ -8,10 +8,12 @@
 #define ITERADORLISTAENCADEADA_HPP_
 #include "IteradorListaEncadeada.h"
 
+
 template<class T>
-IteradorListaEncadeada<T>::IteradorListaEncadeada(ListaEncadeada<T> *l) {
+IteradorListaEncadeada<T>::IteradorListaEncadeada(ListaEncadeada<T>* l){
 
 	iterador = l->obtemPrimeiro();
+
 
 }
 template<class T>

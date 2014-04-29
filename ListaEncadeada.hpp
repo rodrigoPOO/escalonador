@@ -98,11 +98,11 @@ T* ListaEncadeada<T>::RetiraDaPosicao(int pos) {
 		return RetiraDoInicio();
 	}
 	if (pos == tamanho) {
-		return RetiraDoFim();
+		return Retirar();
 	}
 
 	IteradorListaEncadeada<T> it = IteradorListaEncadeada<T>(this);
-	for (int i = 1; i <= pos - 1; i++) {
+	for (int i = 1; i <= pos; i++) {
 		antecessor = it.Proximo();
 	}
 	noSaida = it.Proximo();
@@ -134,9 +134,29 @@ T* ListaEncadeada<T>::RetiraDoFim() {
 	dadoSaida = ultimo->ObtemInfo();
 	antecessor->DefinirProximo(NULL);
 	tamanho--;
-
 	delete ultimo;
 	return dadoSaida;
+
+}
+template<class T>
+T* ListaEncadeada<T>::Retirar(){
+	//remove o ultimo nó
+			if(tamanho == 0){
+				return this->RetiraDoInicio();
+			}
+		//adicionar caso possua só um elemento!
+		NoDaListaSimples<T>* aux = new NoDaListaSimples<T>();
+		aux = primeiro;
+			while(aux->ObtemProximo() != NULL){
+				aux = aux->ObtemProximo();
+			}
+		NoDaListaSimples<T>* penultimo = new NoDaListaSimples<T>();
+
+		penultimo->DefinirProximo(NULL);
+		T* dado = aux->ObtemInfo();
+		delete (aux);
+		tamanho--;
+		return dado;
 
 }
 template<class T>
@@ -156,7 +176,13 @@ T* ListaEncadeada<T>::obtemNo(int pos){
 }
 template<class T>
 void ListaEncadeada<T>::mostrar(){
-    std::cout << primeiro->ObtemInfo();
+    int valor = tamanho;
+    T* inf;
+    NoDaListaSimples<T>* aux = primeiro;
+    	for (int i = 0; i < tamanho; i++) {
+			//std::cout << (*(aux->ObtemInfo()));
+		}
+    std::cout << (aux->ObtemInfo());
 }
 
 #endif

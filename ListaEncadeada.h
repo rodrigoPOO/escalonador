@@ -13,6 +13,7 @@
 #include "CodificacaoErros.h"
 
 
+
 using namespace std;
 template <class T>
 class ListaEncadeada {
@@ -33,6 +34,7 @@ public:
 	bool EstaVazia();
 	int ObtemTamanho();
 	void mostrar();
+	T* Retirar();
 
 	void DestroiLista();
 

@@ -4,14 +4,15 @@
  *  Created on: 21/04/2014
  *      Author: rodrigomello
  */
-
+#include <string.h>
 #ifndef PCB_H_
 #define PCB_H_
-
+#include <stdio.h>
 #define EXECUTANDO 1
 #define ESPERANDO 2
 #define PRONTO 0
 #define TERMINADO 3
+
 
 class PCB{
 
@@ -23,7 +24,7 @@ int estado;
 
 
 public:
-	PCB(char* nome, int exec, int prior, int periodo, int estado);
+	PCB(char* n, int exec, int prior, int per, int est);
 	virtual ~PCB();
 	int getPrioridade();
 	int getPeriodo();
