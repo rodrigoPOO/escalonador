@@ -19,14 +19,14 @@ RMS::RMS(ListaEncadeada<PCB>* processos) {
 	iniciarEscalonamento();
 }
 void RMS::iniciarEscalonamento(){
-	int tamanho = pronto.ObtemTamanho();
+	int tamanho = pronto.ObtemTamanho()+1;
 	NoDaListaSimples<PCB>* aux;
 		while(tamanho > 0){
 			PCB* maisPrio = pronto.obtemPrimeiro()->ObtemInfo();
 			int pos = 0;
 			aux = pronto.obtemPrimeiro();
-			int tamanhoAtual = pronto.ObtemTamanho();
-				for(int i = 0; i <= tamanhoAtual;i++){
+			int tamanhoAtual = pronto.ObtemTamanho()+1;
+				for(int i = 0; i < tamanhoAtual;i++){
 					cout << maisPrio->getPeriodo()<<endl;
 					cout << aux->ObtemInfo()->getPeriodo()<<endl;
 					if(maisPrio->getPeriodo() > aux->ObtemInfo()->getPeriodo()){
@@ -36,10 +36,13 @@ void RMS::iniciarEscalonamento(){
 					}
 					aux = aux->ObtemProximo();
 				}
-				executando.AdicionarNoInicio(maisPrio);
 				pronto.RetiraDaPosicao(pos);
+				executando.AdicionarNoFim(maisPrio);
+				cout << "pos que vai ser tirada" << pos<< endl;
 				cout << "processo com periodo exec "<<maisPrio->getPeriodo() << endl;
-				terminado.AdicionarNoInicio(executando.RetiraDoInicio());
+				cout << maisPrio->getPeriodo();
+				terminado.AdicionarNoFim(maisPrio);
+				executando.Retirar();
 				tamanho--;
 
 		}

@@ -31,6 +31,7 @@ int main(void){
 		}
 	*/
 	RMS* t = new RMS(l);
+
 	//printf("teste");
 	//t->iniciarEscalonamento();
 
