@@ -33,6 +33,7 @@ public:
 	void setPrioridade(int p);
 	void setEstado(int p);
 	void setExec(int exec);
+	void decremento();
 
 };
 

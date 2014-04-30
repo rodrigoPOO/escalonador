@@ -13,6 +13,7 @@ using namespace std;
 RMS::RMS(ListaEncadeada<PCB>* processos) {
 	listaPCB = processos;
 	pronto = *(processos);
+	tempo = 0;
 	//organizar a lista por prioridade
 	//cout << pronto.obtemPrimeiro()->ObtemInfo()->getPeriodo()<<endl;
 
@@ -27,23 +28,40 @@ void RMS::iniciarEscalonamento(){
 			aux = pronto.obtemPrimeiro();
 			int tamanhoAtual = pronto.ObtemTamanho()+1;
 				for(int i = 0; i < tamanhoAtual;i++){
-					cout << maisPrio->getPeriodo()<<endl;
-					cout << aux->ObtemInfo()->getPeriodo()<<endl;
 					if(maisPrio->getPeriodo() > aux->ObtemInfo()->getPeriodo()){
-						//cout << pos;
+
 						maisPrio = aux->ObtemInfo();
 						pos = i;
 					}
 					aux = aux->ObtemProximo();
 				}
 				pronto.RetiraDaPosicao(pos);
-				executando.AdicionarNoFim(maisPrio);
-				cout << "pos que vai ser tirada" << pos<< endl;
-				cout << "processo com periodo exec "<<maisPrio->getPeriodo() << endl;
-				cout << maisPrio->getPeriodo();
-				terminado.AdicionarNoFim(maisPrio);
-				executando.Retirar();
-				tamanho--;
+				cout << "tamanho atual" << tamanhoAtual << endl;
+				cout << "tamanho total" << tamanho << endl;
+				if(tamanho == tamanhoAtual){
+					tempo++;
+					executando.AdicionarNoFim(maisPrio);
+					cout << "processo com periodo exec "<<maisPrio->getPeriodo() << endl;
+					cout << "processo tem " << maisPrio->getExec() << endl;
+					maisPrio->decremento();
+					cout << "processo foi decrementado e tem " << maisPrio->getExec() << endl;
+						if(maisPrio->getExec() == 0){
+							cout << "processo acabou" << endl;
+							terminado.AdicionarNoFim(maisPrio);
+							executando.Retirar();
+							tamanho--;
+
+						}else{
+							cout << "voltou para pronto" << endl;
+							pronto.AdicionarNoFim(maisPrio);
+
+						}
+
+					//cout << "pos que vai ser tirada" << pos<< endl;
+
+					//cout << maisPrio->getPeriodo();
+
+				}
 
 		}
 }

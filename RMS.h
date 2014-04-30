@@ -18,7 +18,7 @@ ListaEncadeada<PCB> pronto;
 ListaEncadeada<PCB> executando;
 ListaEncadeada<PCB> bloqueado;
 ListaEncadeada<PCB> terminado;
-
+int tempo;
 
 public:
 	RMS();
@@ -32,6 +32,7 @@ public:
 	void decrementarProcesso(PCB p);
 	void iniciarEscalonamento();
 	void mostrarL();
+
 
 
 };

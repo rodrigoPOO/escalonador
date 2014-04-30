@@ -15,6 +15,9 @@ PCB::PCB(char* n, int exec, int prior, int per, int est) {
 	estado = est;
 
 }
+void PCB::decremento(){
+	execucao--;
+}
 
 PCB::~PCB() {
 	// TODO Auto-generated destructor stub
