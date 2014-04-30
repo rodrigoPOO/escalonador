@@ -8,9 +8,10 @@
 #include <stdio.h>
 #include "RMS.h"
 #include "ListaEncadeada.h"
+#include <iostream>
 
 
-
+using namespace std;
 
 int main(void){
 	char* v= "1111";
@@ -23,6 +24,12 @@ int main(void){
 	l->AdicionarNoInicio(p1);
 	l->AdicionarNoInicio(p2);
 	l->AdicionarNoInicio(p3);
+	/*l->RetiraDaPosicao(3);
+
+		for(int i = 0; i <= l->ObtemTamanho();i++){
+			cout << l->obtemNo(i)->getExec() << endl;
+		}
+	*/
 	RMS* t = new RMS(l);
 	//printf("teste");
 	//t->iniciarEscalonamento();

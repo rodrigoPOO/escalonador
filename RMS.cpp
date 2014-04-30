@@ -19,41 +19,30 @@ RMS::RMS(ListaEncadeada<PCB>* processos) {
 	iniciarEscalonamento();
 }
 void RMS::iniciarEscalonamento(){
-	while(pronto.obtemPrimeiro() != NULL){
-		//primeiro elemento seria o mais prioritario.
-		PCB* executar = pronto.obtemPrimeiro()->ObtemInfo();
-		int pos = 0;
-		int posicaoProcessoPrioritario;
-		NoDaListaSimples<PCB>* aux = pronto.obtemPrimeiro();
-		printf("%d\n",aux->ObtemInfo()->getPeriodo());
-		int quant = pronto.ObtemTamanho();
-			while(quant > 0){
-
-				if(executar->getPeriodo() > aux->ObtemInfo()->getPeriodo()){
-					executar = aux->ObtemInfo();
-					printf("%d\n",pos);
-					posicaoProcessoPrioritario = pos;
-					//printf("%d\n",posicaoProcessoPrioritario);
-
-
+	int tamanho = pronto.ObtemTamanho();
+	NoDaListaSimples<PCB>* aux;
+		while(tamanho > 0){
+			PCB* maisPrio = pronto.obtemPrimeiro()->ObtemInfo();
+			int pos = 0;
+			aux = pronto.obtemPrimeiro();
+			int tamanhoAtual = pronto.ObtemTamanho();
+				for(int i = 0; i <= tamanhoAtual;i++){
+					cout << maisPrio->getPeriodo()<<endl;
+					cout << aux->ObtemInfo()->getPeriodo()<<endl;
+					if(maisPrio->getPeriodo() > aux->ObtemInfo()->getPeriodo()){
+						//cout << pos;
+						maisPrio = aux->ObtemInfo();
+						pos = i;
+					}
+					aux = aux->ObtemProximo();
 				}
-				printf("sem if %d\n",pos);
-				pos++;
-				aux = aux->ObtemProximo();
-				quant++;
+				executando.AdicionarNoInicio(maisPrio);
+				pronto.RetiraDaPosicao(pos);
+				cout << "processo com periodo exec "<<maisPrio->getPeriodo() << endl;
+				terminado.AdicionarNoInicio(executando.RetiraDoInicio());
+				tamanho--;
 
-			}
-		pronto.RetiraDaPosicao(posicaoProcessoPrioritario);
-		executando.AdicionarNoInicio(executar);
-		//processo é executado
-		//int periodo = executando.obtemPrimeiro()->ObtemInfo()->getPeriodo();
-		//int quantProc = listaPCB->ObtemTamanho();
-			//if(periodo >= executando.obtemPrimeiro()->ObtemInfo()->getExec()){
-		printf("processo com periodo %d foi executado\n",executar->getPeriodo());
-		terminado.AdicionarNoFim(executando.RetiraDoInicio());
-				//}
-	}
-
+		}
 }
 
 RMS::~RMS() {
