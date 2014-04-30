@@ -6,21 +6,53 @@
  */
 
 #include "RMS.h"
+#include <iostream>
+
+using namespace std;
 
 RMS::RMS(ListaEncadeada<PCB>* processos) {
 	listaPCB = processos;
-	//listaPCB->mostrar();
+	pronto = *(processos);
 	//organizar a lista por prioridade
+	//cout << pronto.obtemPrimeiro()->ObtemInfo()->getPeriodo()<<endl;
+
+	iniciarEscalonamento();
 }
 void RMS::iniciarEscalonamento(){
-	//primeiro elemento seria o mais prioritario.
-	PCB* executar = listaPCB->RetiraDoInicio();
-	executando.AdicionarNoInicio(executar);
-	int periodo = executando.obtemPrimeiro()->ObtemInfo()->getPeriodo();
-	//int quantProc = listaPCB->ObtemTamanho();
-		if(periodo >= executando.obtemPrimeiro()->ObtemInfo()->getExec()){
-				terminado.AdicionarNoFim(executando.RetiraDoInicio());
+	while(pronto.obtemPrimeiro() != NULL){
+		//primeiro elemento seria o mais prioritario.
+		PCB* executar = pronto.obtemPrimeiro()->ObtemInfo();
+		int pos = 0;
+		int posicaoProcessoPrioritario;
+		NoDaListaSimples<PCB>* aux = pronto.obtemPrimeiro();
+		printf("%d\n",aux->ObtemInfo()->getPeriodo());
+		int quant = pronto.ObtemTamanho();
+			while(quant > 0){
+
+				if(executar->getPeriodo() > aux->ObtemInfo()->getPeriodo()){
+					executar = aux->ObtemInfo();
+					printf("%d\n",pos);
+					posicaoProcessoPrioritario = pos;
+					//printf("%d\n",posicaoProcessoPrioritario);
+
+
+				}
+				printf("sem if %d\n",pos);
+				pos++;
+				aux = aux->ObtemProximo();
+				quant++;
+
 			}
+		pronto.RetiraDaPosicao(posicaoProcessoPrioritario);
+		executando.AdicionarNoInicio(executar);
+		//processo é executado
+		//int periodo = executando.obtemPrimeiro()->ObtemInfo()->getPeriodo();
+		//int quantProc = listaPCB->ObtemTamanho();
+			//if(periodo >= executando.obtemPrimeiro()->ObtemInfo()->getExec()){
+		printf("processo com periodo %d foi executado\n",executar->getPeriodo());
+		terminado.AdicionarNoFim(executando.RetiraDoInicio());
+				//}
+	}
 
 }
 
